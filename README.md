@@ -1,20 +1,33 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+## Use Azure app service editor
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+1. make code change in the online editor
+2. open the console window and run
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+```
+build.cmd
+```
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Use Visual Studio 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Build and debug
+1. download source code zip and extract source in local folder
+2. open {PROJ_NAME}.sln in Visual Studio
+3. build and run the bot
+4. download and run [botframework-emulator](https://emulator.botframework.com/)
+5. connect the emulator to http://localhost:3987
+
+### Publish back
+
+In Visual Studio, right click on {PROJ_NAME} and select 'Publish'
+
+For first time publish after downloading source code
+1. In the publish profiles tab, click 'Import'
+2. Browse to 'PostDeployScripts' and pick '{SITE_NAME}.publishSettings'
+
+
+## Use continuous integration
+
+If you have setup continuous integration, then your bot will automatically deployed when new changes are pushed to the source repository.
+
+
+
