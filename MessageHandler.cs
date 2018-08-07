@@ -1,4 +1,5 @@
 ﻿using SimpleEchoBot.Controllers;
+using SimpleEchoBot.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,26 @@ namespace SimpleEchoBot
     {
         CanvasController _canvas = new CanvasController();
         TestController _test = new TestController();
-        TodoController _todo = new TodoController();
+        //TodoController _todo = new TodoController();
 
         public MessageHandler()
         {
         }
-        public void Handle(string text)
+        public List<string> Handle(string text)
         {
             if (text.Contains("canvas"))
             {
-                CanvasTimeDecider(text);
+                return CanvasTimeDecider(text);
             }
-            else if (text.Contains("todo"))
-            {
+            //else if (text.Contains("todo"))
+            //{
+            //    return 
+            //}
 
-            }
+
+            List<string> output = new List<string>();
+            output.Add("Couldn't find what you were trying to do");
+            return output;
 
         }
 
@@ -34,23 +40,23 @@ namespace SimpleEchoBot
         /// There are 3 options for time. Today, This week, and the next 3 days.
         /// </summary>
         /// <param name="text"></param>
-        public void CanvasTimeDecider(string text)
+        public List<string> CanvasTimeDecider(string text)
         {
             if (text.Contains("today"))
             {
-                _canvas.TodayAsync(text);
+                return _canvas.Today(text).Result;
             }
             else if (text.Contains("week"))
             {
-                _canvas.Week(text);
+                return _canvas.Week(text).Result;
             }
-            else if (text.Contains("next"))
-            {
-                _canvas.Next(text);
-            }
+            //else if (text.Contains("upcoming"))
+            //{
+            //    _canvas.Next(text);
+            //}
             else
             {
-                HandlerError(text);
+                return HandlerError(text);
             }
         }
 
@@ -61,9 +67,12 @@ namespace SimpleEchoBot
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public string HandlerError(string text)
+        public List<string> HandlerError(string text)
         {
-            return $"Something went wrong with your request for {text}";
+            List<string> output = new List<string>();
+            
+            output.Add($"Something went wrong with your request for {text}");
+            return output;
         }
     }
 }

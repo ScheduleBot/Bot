@@ -176,7 +176,6 @@
     <Compile Include="Controllers\CanvasController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\TodoController.cs" />
     <Compile Include="Dialogs\EchoDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
