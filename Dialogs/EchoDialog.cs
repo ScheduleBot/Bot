@@ -20,15 +20,15 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
-            MessageHandler _context = new MessageHandler();
+            MessageHandler _responseHandler = new MessageHandler();
             var message = await argument;
-            message.Text = message.Text.ToLower();
+            string text = message.Text.ToLower();
 
             if (message.Text.Substring(0, 4) == "@bot")
             {
-                await context.PostAsync(_context.Handle(message.Text));
+                _responseHandler.Handle(text);
                 await context.PostAsync($"Speaking to the bot today!");
-                context.Wait(MessageReceivedAsync);
+                //context.Wait(MessageReceivedAsync);
                 if (message.Text.Contains("canvas"))
                 {
                     await context.PostAsync($"Speaking to canvas");
