@@ -5,6 +5,7 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
 using SimpleEchoBot;
+using System.Collections.Generic;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
@@ -20,22 +21,18 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
-            MessageHandler _context = new MessageHandler();
+            MessageHandler _responseHandler = new MessageHandler();
+
             var message = await argument;
-            message.Text = message.Text.ToLower();
 
-            if (message.Text.Substring(0, 4) == "@bot")
+            string text = message.Text.ToLower();
+            await context.PostAsync(message.Text);
+            if (text.Substring(0, 4) == "@bot")
             {
-                await context.PostAsync(_context.Handle(message.Text));
-                await context.PostAsync($"Speaking to the bot today!");
-                context.Wait(MessageReceivedAsync);
-                if (message.Text.Contains("canvas"))
+                List<string> output = _responseHandler.Handle(text);
+                foreach(string str in output)
                 {
-                    await context.PostAsync($"Speaking to canvas");
-                }
-                if (message.Text.Contains("meme"))
-                {
-
+                    await context.PostAsync(str);
                 }
                 
             }
