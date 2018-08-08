@@ -12,8 +12,11 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
     [Serializable]
     public class EchoDialog : IDialog<object>
     {
-        protected int count = 1;
-
+        /// <summary>
+        /// When the bot is initialized this is ran
+        /// </summary>
+        /// <param name="context">Context (I believe) is the environment pertaining to the message came from, Slack / Web Chatbox / Skype </param>
+        /// <returns> A "listener" for a message (I believe) </returns>
         public async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
@@ -26,9 +29,11 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             var message = await argument;
 
             string text = message.Text.ToLower();
-            await context.PostAsync(message.Text);
-            if (text.Substring(0, 4) == "@bot")
+            //When the bot is "mentioned" in slack, the string sent back to here, so if we find any message in slack that starts the message by mentioning our bot we want to do something.
+            if (text.Substring(0, 7) == "@bot202")
             {
+                // A message letting the user know we are making calls to the api, (which can be quite slow)
+                await context.PostAsync("Booting up windows '98. One moment please!");
                 List<string> output = _responseHandler.Handle(text);
                 foreach(string str in output)
                 {
@@ -38,21 +43,5 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
 
         }
-
-        public async Task AfterResetAsync(IDialogContext context, IAwaitable<bool> argument)
-        {
-            var confirm = await argument;
-            if (confirm)
-            {
-                this.count = 1;
-                await context.PostAsync("Reset count.");
-            }
-            else
-            {
-                await context.PostAsync("Did not reset count.");
-            }
-            context.Wait(MessageReceivedAsync);
-        }
-
     }
 }
