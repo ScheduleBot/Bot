@@ -175,17 +175,20 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CanvasController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Dialogs\EchoDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MessageHandler.cs" />
-    <Compile Include="Model\Author.cs" />
-    <Compile Include="Model\Canvas.cs" />
-    <Compile Include="Model\DiscussionTopic.cs" />
-    <Compile Include="Model\Permissions.cs" />
-    <Compile Include="Model\RootObject.cs" />
+    <Compile Include="InputHandler\MessageHandler.cs" />
+    <Compile Include="Model\Canvas\Author.cs" />
+    <Compile Include="Model\Canvas\Canvas.cs" />
+    <Compile Include="Model\Canvas\DiscussionTopic.cs" />
+    <Compile Include="Model\Canvas\Permissions.cs" />
+    <Compile Include="Model\Canvas\RootObject.cs" />
+    <Compile Include="Model\Classes\Class.cs" />
+    <Compile Include="Model\Classes\Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

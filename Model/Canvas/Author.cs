@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SimpleEchoBot.Controllers
+namespace SimpleEchoBot.Model
 {
-    public class TestController
+    public class Author
     {
     }
 }
